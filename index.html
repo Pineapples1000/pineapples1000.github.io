@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pineapple Programming</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="images/pappy.png" type="image/png">
+    <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet' type='text/css'>
+</head>
+
+<body id="bodyID">
+    <div id="wrapper">
+        <header id="headerID"></header>
+        <div class="box">
+            <h2>About Me</h2>
+            <p>
+                Hi, I'm Pineapples, a web/game developer. I enjoy making fun games for a hobby!
+                I live in the United States and I started programming in 2018, when I was 8.
+                In Febuary, 2022 I created a Khan Academy account and started their introduction to programming course.
+                Since then, I've made many projects on there, most significantly games.
+                Now I plan to make more cool stuff before I go off to college, hopefully for a CS or Software
+                Engineering
+                Degree.
+                Some of my other hobbies include skiing, hiking, biking, and photography.
+                All the background images on this website are taken by me.
+                I am a member of the boy scouts and currently have obtained the Life rank.
+            </p>
+        </div>
+        <div class="box">
+            <h2>Programming Languages I have experience in:</h2>
+            <ul class="pineappleBullet">
+                <li>Javascript - Made several games in Javascript</li>
+                <li>HTML/CSS - Made many webpages, including this one!! =)</li>
+                <li>Node.js - Did a little bit of work in Node.js, similar to JS</li>
+                <li>Java - Took the APCS Course</li>
+                <li>C# - Finished the W3Schools C# course for Unity use</li>
+            </ul>
+        </div>
+        <div class="box">
+            <h2>Contact Me</h2>
+            <p>I can be contacted through my Discord server, linked in the footer below or <a class="LinkDesign"
+                    href="https://discord.gg/Y3XNzmQpCe">here</a>.</p>
+            <p>I am currently setting up an email for my website, but I prefer to be contacted on discord. You can also
+                suggest games and stuff in my discord server.</p>
+            <div id="discordAPI">
+                <img src="images/pappy.png">
+                <div>
+                    <span id="discordServerAPIHeader"></span><br>
+                    <span id="discordServerAPIOnlineCount"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footerID"></footer>
+</body>
+<script src="bgscript.js"></script>
+<script src="headerFooter.js"></script>
+<script>
+    const header = document.getElementById('discordServerAPIHeader');
+    const onlineCount = document.getElementById('discordServerAPIOnlineCount');
+    var fetchDiscord = function () {
+        onlineCount.innerHTML = `<i>Loading...</i>`;
+        fetch('https://discord.com/api/guilds/1409596172305170616/widget.json')
+            .then(response => response.json()) // Parse the JSON response
+            .then(data => {
+                header.textContent = data.name + " Discord Server";
+                onlineCount.innerHTML = `<b>Online:</b> ${data.presence_count}`;
+            })
+            .catch(error => {
+                console.error('Error fetching Discord API JSON:', error);
+                header.textContent = "Loading Error";
+                onlineCount.innerHTML = `<a class="LinkDesign" onclick="fetchDiscord();">Try Again</a>`;
+            });
+    }
+    fetchDiscord();
+</script>
+
+</html>
